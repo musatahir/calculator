@@ -6,6 +6,9 @@ body {
     background-color: azure;
 }
 
+.calc-container {
+    border: 3px solid black;
+}
 
 .calc-buttons {
     display: flex;
@@ -27,6 +30,7 @@ button {
     padding: 20px;
     text-align: center;
     width: 25%;
+    border: 1px solid black;
 }
 
 .calc-display {
