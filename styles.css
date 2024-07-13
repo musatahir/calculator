@@ -29,6 +29,18 @@ button {
     width: 25%;
 }
 
+.calc-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.display-history {
+    min-height: 25px;
+}
 
 .button-zero {
     width: 50%;
