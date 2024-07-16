@@ -60,28 +60,38 @@ function updateDisplay() {
 
 let freeOperator = false;
 
+function roundNumber(num) {
+    return Math.round(num * 100000) / 100000;
+}
 
-signButton.addEventListener('click', () => {
+
+
+percentButton.addEventListener('click', () => {
     if (freeOperator === true) {
-        displayValue = String(operator("*", -1, +displayValue));
+        displayValue = String(roundNumber(operator("/", +displayValue, 100)));
         updateDisplay()
     }
 })
 
 
+signButton.addEventListener('click', () => {
+    if (freeOperator === true) {
+        displayValue = String(roundNumber(operator("*", -1, +displayValue)));
+        updateDisplay()
+    }
+})
 
 
 decimalButton.addEventListener('click', () => {
-    if (displayValue.includes('.')) {
-        return;
-    }
-    else if (displayValue === firstNumber) {
+
+    if (displayValue === firstNumber) {
         displayValue = ".";
-    }
-    else {
+        updateDisplay()
+    } else if (!displayValue.includes('.')) {
         displayValue += ".";
+        updateDisplay()
     }
-    updateDisplay()
+
 })
 
 clearButton.addEventListener('click', () => {
@@ -94,7 +104,7 @@ clearButton.addEventListener('click', () => {
 
 equalsButton.addEventListener('click', () => {
     if (operation !== null && freeOperator === true) {
-        displayValue = String(operator(operation, +firstNumber, +displayValue));
+        displayValue = String(roundNumber(operator(operation, +firstNumber, +displayValue)));
         updateDisplay()
         firstNumber = displayValue;
         operation = null;
@@ -145,7 +155,7 @@ operationButtons.forEach(button => {
             }
         }
         else if (freeOperator === true) {
-            displayValue = String(operator(operation, +firstNumber, +displayValue));
+            displayValue = String(roundNumber(operator(operation, +firstNumber, +displayValue)));
             updateDisplay()
             firstNumber = displayValue;
             operation = buttonOperation;
