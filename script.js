@@ -33,7 +33,6 @@ function operator(operator, a, b) {
 
 
 let firstNumber = "";
-let secondNumber = "";
 let operation = null;
 let displayValue = "0";
 
@@ -60,6 +59,15 @@ function updateDisplay() {
 
 
 let freeOperator = false;
+
+clearButton.addEventListener('click', () => {
+    console.log("OK");
+    firstNumber = "";
+    operation = null;
+    displayValue = "0";
+    updateDisplay()
+    freeOperator = false;
+})
 
 equalsButton.addEventListener('click', () => {
     if (operation !== null && freeOperator === true) {
