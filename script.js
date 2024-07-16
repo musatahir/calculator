@@ -61,12 +61,26 @@ function updateDisplay() {
 let freeOperator = false;
 
 
+signButton.addEventListener('click', () => {
+    if (freeOperator === true) {
+        displayValue = String(operator("*", -1, +displayValue));
+        updateDisplay()
+    }
+})
+
+
+
+
 decimalButton.addEventListener('click', () => {
-    console.log("OK");
     if (displayValue.includes('.')) {
         return;
     }
-    displayValue += ".";
+    else if (displayValue === firstNumber) {
+        displayValue = ".";
+    }
+    else {
+        displayValue += ".";
+    }
     updateDisplay()
 })
 
