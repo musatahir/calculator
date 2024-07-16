@@ -60,15 +60,23 @@ function updateDisplay() {
 
 let freeOperator = false;
 
-function roundNumber(num) {
-    return Math.round(num * 100000) / 100000;
+function roundToMaxFiveDecimals(number) {
+    const strNumber = number.toString();
+    if (strNumber.includes('.')) {
+        const decimalPart = strNumber.split('.')[1];
+        if (decimalPart.length > 5) {
+            console.log("OK");
+            return Number((number.toExponential(5)));
+        }
+    }
+    return number;
 }
 
 
 
 percentButton.addEventListener('click', () => {
     if (freeOperator === true) {
-        displayValue = String(roundNumber(operator("/", +displayValue, 100)));
+        displayValue = String(roundToMaxFiveDecimals(operator("/", +displayValue, 100)));
         updateDisplay()
     }
 })
@@ -76,7 +84,7 @@ percentButton.addEventListener('click', () => {
 
 signButton.addEventListener('click', () => {
     if (freeOperator === true) {
-        displayValue = String(roundNumber(operator("*", -1, +displayValue)));
+        displayValue = String(roundToMaxFiveDecimals(operator("*", -1, +displayValue)));
         updateDisplay()
     }
 })
@@ -104,7 +112,7 @@ clearButton.addEventListener('click', () => {
 
 equalsButton.addEventListener('click', () => {
     if (operation !== null && freeOperator === true) {
-        displayValue = String(roundNumber(operator(operation, +firstNumber, +displayValue)));
+        displayValue = String(roundToMaxFiveDecimals(operator(operation, +firstNumber, +displayValue)));
         updateDisplay()
         firstNumber = displayValue;
         operation = null;
@@ -155,7 +163,7 @@ operationButtons.forEach(button => {
             }
         }
         else if (freeOperator === true) {
-            displayValue = String(roundNumber(operator(operation, +firstNumber, +displayValue)));
+            displayValue = String(roundToMaxFiveDecimals(operator(operation, +firstNumber, +displayValue)));
             updateDisplay()
             firstNumber = displayValue;
             operation = buttonOperation;
