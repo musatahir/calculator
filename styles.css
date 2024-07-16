@@ -7,6 +7,7 @@ body {
 }
 
 .calc-container {
+    width: 250px;
     border: 3px solid black;
 }
 
@@ -23,7 +24,6 @@ body {
     display: flex;
 }
 
-
 button {
     display: flex;
     justify-content: center;
@@ -36,7 +36,6 @@ button {
 .calc-display {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: flex-end;
     border: 1px solid black;
     padding: 8px;
@@ -47,5 +46,5 @@ button {
 }
 
 .button-zero {
-    width: 50%;
+    flex: 1;
 }
