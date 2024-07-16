@@ -40,7 +40,7 @@ const numberButtons = document.querySelectorAll(".button-number");
 const operationButtons = document.querySelectorAll(".button-operator");
 const percentButton = document.querySelector(".percent");
 const signButton = document.querySelector(".sign");
-const decimalButton = document.querySelector(".decimal");
+const decimalButton = document.querySelector(".button-decimal");
 const equalsButton = document.querySelector(".equals");
 const clearButton = document.querySelector(".clear");
 
@@ -60,8 +60,17 @@ function updateDisplay() {
 
 let freeOperator = false;
 
-clearButton.addEventListener('click', () => {
+
+decimalButton.addEventListener('click', () => {
     console.log("OK");
+    if (displayValue.includes('.')) {
+        return;
+    }
+    displayValue += ".";
+    updateDisplay()
+})
+
+clearButton.addEventListener('click', () => {
     firstNumber = "";
     operation = null;
     displayValue = "0";
