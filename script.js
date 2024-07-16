@@ -47,14 +47,14 @@ const clearButton = document.querySelector(".clear");
 function trimDisplayValue() {
     const MAX_LENGTH = 29;
     if (displayValue.length > MAX_LENGTH) {
-        displayValue = displayValue.slice(-MAX_LENGTH);
+        return displayValue.slice(-MAX_LENGTH);
     }
+    return displayValue;
 }
 
 function updateDisplay() {
-    trimDisplayValue()
     const displayElement = document.querySelector('.display-input');
-    displayElement.innerText = displayValue;
+    displayElement.innerText = trimDisplayValue(displayValue);
 }
 
 
