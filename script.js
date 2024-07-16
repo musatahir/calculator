@@ -61,34 +61,41 @@ function updateDisplay() {
 
 let freeOperator = false;
 
+equalsButton.addEventListener('click', () => {
+    if (operation !== null && freeOperator === true) {
+        displayValue = String(operator(operation, +firstNumber, +displayValue));
+        updateDisplay()
+        firstNumber = displayValue;
+        operation = null;
+    }
+})
+
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         const digit = button.innerHTML;
         if (operation === null) {
             if (displayValue === "0") {
-                firstNumber = digit;
+                // firstNumber = digit;
                 displayValue = digit;
             } else {
-                firstNumber += digit;
+                // firstNumber += digit;
                 displayValue += digit;
             }
 
-            if (isValid(firstNumber)) {
-                freeOperator = true;
-            }
         } else {
 
             if (displayValue === firstNumber) {
-                secondNumber = digit;
+                // secondNumber = digit;
                 displayValue = digit;
             } else {
-                secondNumber += digit;
+                // secondNumber += digit;
                 displayValue += digit;
             }
 
-            if (isValid(secondNumber)) {
-                freeOperator = true;
-            }
+        }
+
+        if (isValid(displayValue)) {
+            freeOperator = true;
         }
 
         updateDisplay();
@@ -111,7 +118,6 @@ operationButtons.forEach(button => {
             updateDisplay()
             firstNumber = displayValue;
             operation = buttonOperation;
-            secondNumber = "";
             freeOperator = false;
         }
 
