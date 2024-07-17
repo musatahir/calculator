@@ -69,10 +69,10 @@ function roundToMaxFiveDecimals(number) {
         const decimalPart = strNumber.split('.')[1];
         console.log(absNumber);
         if (absNumber < 0.1) {
-            return Number((number.toExponential(6)));
+            return Number((number.toExponential(5)));
         }
-        else if (decimalPart.length > 6) {
-            return parseFloat(number.toFixed(6));
+        else if (decimalPart.length > 5) {
+            return Number(number.toFixed(5));
         }
     }
     return number;
