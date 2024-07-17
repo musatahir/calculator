@@ -5,7 +5,7 @@ const multiply = (a, b) => a * b;
 const subtract = (a, b) => a - b;
 const divide = (a, b) => {
     if (b === 0) {
-        throw new Error("Division by zero is not allowed.");
+        return "Invalid";
     }
     return a / b;
 }
@@ -62,11 +62,17 @@ let freeOperator = false;
 
 function roundToMaxFiveDecimals(number) {
     const strNumber = number.toString();
-    if (strNumber.includes('.')) {
+    const absNumber = Math.abs(number);
+
+    if (strNumber.includes('.') || strNumber.includes('e-')) {
+        console.log(strNumber);
         const decimalPart = strNumber.split('.')[1];
-        if (decimalPart.length > 5) {
-            console.log("OK");
-            return Number((number.toExponential(5)));
+        console.log(absNumber);
+        if (absNumber < 0.1) {
+            return Number((number.toExponential(6)));
+        }
+        else if (decimalPart.length > 6) {
+            return parseFloat(number.toFixed(6));
         }
     }
     return number;
