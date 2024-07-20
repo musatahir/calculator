@@ -20,6 +20,11 @@ body {
 
 }
 
+button:hover {
+    background-color: #555555;
+    transition: all 0.2s;
+}
+
 .display-input {
     align-self: center;
     text-align: right;
@@ -55,6 +60,10 @@ body {
 button {
     margin: 1px;
     border: 1px solid black;
+}
+
+.operation-selected {
+    background-color: #555555;
 }
 
 /* .calc-display {

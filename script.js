@@ -58,24 +58,25 @@ function updateDisplay() {
 
 
 let freeOperator = false;
+let decimalLength;
 
 function roundToMaxFiveDecimals(number) {
     const strNumber = number.toString();
-    const absNumber = Math.abs(number);
-    console.log(number);
-    if (absNumber > 99999999) {
-        return (number.toExponential(3));
+    console.log(strNumber);
+    const numberLength = strNumber.length;
+    if (strNumber.includes('.')) {
+        decimalLength = strNumber.split('.')[1].length;
     }
-    else if (strNumber.includes('.')) {
-        const decimalLength = strNumber.split('.')[1].length;
-        let scientificNotation = number.toExponential(3);
-        let figs = scientificNotation.split('e')[0].replace('.', '').replace(/0+$/, '').length;
-        if (decimalLength > 5) {
-            if (figs < 5) {
-                return scientificNotation;
-            }
-            return Number(number.toFixed(5));
+    else {
+        decimalLength = 0
+    }
+    console.log(numberLength);
+    if (numberLength > 10) {
+        console.log(strNumber);
+        if (numberLength - decimalLength < 6 && !strNumber.includes('e')) {
+            return number.toFixed(5);
         }
+        return number.toExponential(3)
     }
     return number;
 }
@@ -113,6 +114,7 @@ decimalButton.addEventListener('click', () => {
 clearButton.addEventListener('click', () => {
     firstNumber = "";
     operation = null;
+    operationButtons.forEach(button => button.classList.remove('operation-selected'));
     displayValue = "0";
     updateDisplay()
     freeOperator = false;
@@ -153,6 +155,7 @@ numberButtons.forEach(button => {
         }
 
         if (isValid(displayValue)) {
+            operationButtons.forEach(button => button.classList.remove('operation-selected'));
             freeOperator = true;
         }
 
@@ -169,6 +172,7 @@ operationButtons.forEach(button => {
                 firstNumber = displayValue;
                 operation = buttonOperation;
                 freeOperator = false;
+                button.classList.toggle('operation-selected');
             }
         }
         else if (freeOperator === true) {
@@ -176,7 +180,10 @@ operationButtons.forEach(button => {
             updateDisplay()
             firstNumber = displayValue;
             operation = buttonOperation;
+            console.log(operation);
             freeOperator = false;
+            document.querySelector(".button-operator");
+            button.classList.toggle('operation-selected');
         }
 
     })
