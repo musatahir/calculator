@@ -31,7 +31,6 @@ function operator(operator, a, b) {
 }
 
 
-
 let firstNumber = "";
 let operation = null;
 let displayValue = "0";
@@ -45,7 +44,7 @@ const equalsButton = document.querySelector(".equals");
 const clearButton = document.querySelector(".clear");
 
 function trimDisplayValue() {
-    const MAX_LENGTH = 29;
+    const MAX_LENGTH = 10;
     if (displayValue.length > MAX_LENGTH) {
         return displayValue.slice(-MAX_LENGTH);
     }
@@ -63,15 +62,18 @@ let freeOperator = false;
 function roundToMaxFiveDecimals(number) {
     const strNumber = number.toString();
     const absNumber = Math.abs(number);
-
-    if (strNumber.includes('.') || strNumber.includes('e-')) {
-        console.log(strNumber);
-        const decimalPart = strNumber.split('.')[1];
-        console.log(absNumber);
-        if (absNumber < 0.1) {
-            return Number((number.toExponential(5)));
-        }
-        else if (decimalPart.length > 5) {
+    console.log(number);
+    if (absNumber > 99999999) {
+        return (number.toExponential(3));
+    }
+    else if (strNumber.includes('.')) {
+        const decimalLength = strNumber.split('.')[1].length;
+        let scientificNotation = number.toExponential(3);
+        let figs = scientificNotation.split('e')[0].replace('.', '').replace(/0+$/, '').length;
+        if (decimalLength > 5) {
+            if (figs < 5) {
+                return scientificNotation;
+            }
             return Number(number.toFixed(5));
         }
     }
@@ -128,6 +130,7 @@ equalsButton.addEventListener('click', () => {
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
         const digit = button.innerHTML;
+
         if (operation === null) {
             if (displayValue === "0") {
                 // firstNumber = digit;
@@ -139,7 +142,7 @@ numberButtons.forEach(button => {
 
         } else {
 
-            if (displayValue === firstNumber) {
+            if (displayValue === firstNumber && freeOperator === false) {
                 // secondNumber = digit;
                 displayValue = digit;
             } else {
